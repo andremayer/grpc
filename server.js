@@ -24,6 +24,22 @@ server.addService(calculatorProto.Calculator.service, {
     const response = { result: call.request.op1 + call.request.op2 };
     callback(null, response);
   },
+
+  ComputeAverage: (call, callback) => {
+    let sum = 0;
+    let count = 0;
+
+    call.on('data', (request) => {
+      sum += request.value;
+      count += 1;
+    });
+
+    call.on('end', () => {
+      const average = count === 0 ? 0 : sum / count;
+      callback(null, { average });
+    });
+  },
+
 });
 
 const PORT = 50051;

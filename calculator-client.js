@@ -23,3 +23,18 @@ client.Sum({ op1, op2 }, (error, response) => {
     console.error(error);
   }
 });
+
+const computeAverageRequestValues = [1, 2, 3, 4, 5];
+const computeAverageCall = client.ComputeAverage((error, response) => {
+  if (!error) {
+    console.log('Compute Average Result:', response.average);
+  } else {
+    console.error(error);
+  }
+});
+
+computeAverageRequestValues.forEach((value) => {
+  computeAverageCall.write({ value });
+});
+
+computeAverageCall.end();

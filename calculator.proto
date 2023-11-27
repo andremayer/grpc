@@ -4,7 +4,7 @@ package calculator;
 
 service Calculator {
   rpc Sum (OperandsRequest) returns (CalculatorResponse);
-  //rpc Subtract (OperandsRequest) returns (CalculatorResponse);
+  rpc ComputeAverage (stream ComputeAverageRequest) returns (ComputeAverageResponse);
 }
 
 message OperandsRequest {
@@ -14,4 +14,12 @@ message OperandsRequest {
 
 message CalculatorResponse {
   int32 result = 1;
+}
+
+message ComputeAverageRequest {
+  int32 value = 1;
+}
+
+message ComputeAverageResponse {
+  double average = 1;
 }
